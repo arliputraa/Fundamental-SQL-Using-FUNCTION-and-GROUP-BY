@@ -97,5 +97,48 @@ Output:
 
 ## Fungsi Text
 
+Sama seperti fungsi skalar matematika, kita juga bisa mengecek fungsi - fungsi skalar text di dokumentasi postgresql: https://www.postgresql.org/docs/9.1/functions-string.html; dan dokumentasi mysql: https://dev.mysql.com/doc/refman/8.0/en/string-functions.html. 
+
+Untuk bahan praktik, kita akan mencoba beberapa fungsi saja yang sering digunakan.
+<img width="517" alt="image" src="https://user-images.githubusercontent.com/110078907/212652701-f0d59c24-3ac2-42f2-b179-2d39a242e17a.png">
+
+## Fungsi Text - CONCAT()
+Syntax:
+
+        SELECT CONCAT(ColumnName1, ColumnName2, ColumnNameN)  
+        FROM TableName; 
+        
+        select studentid, concat(firstname, lastname) as name, semester1, semester2, markgrowth
+        from students;
+        
+Output:
+
+<img width="317" alt="image" src="https://user-images.githubusercontent.com/110078907/212653228-d8b104d4-3b33-49c7-8788-9484ae3cbaa7.png">
+
+## Fungsi Text - SUBSTRING_INDEX()
+Syntax: 
+
+        SELECT SUBSTRING_INDEX(column, delimiter, index to return)  
+        FROM TableName; 
+        
+        select studentid, substring_index(email,'@',1) as name
+        from students;
+        
+ Output:
+ 
+ <img width="144" alt="image" src="https://user-images.githubusercontent.com/110078907/212653564-42637989-9211-4511-b142-dba7d7993e5c.png">
+
+## Fungsi Text - SUBSTR()
+Syntax:
+
+        SELECT SUBSTR(columnName, Start Index, Number of string to be extract)
+        FROM TableName;
+        
+        select studentid, substr(firstname, 2, 3) as initial 
+        from students;
+
+Output:
+
+<img width="114" alt="image" src="https://user-images.githubusercontent.com/110078907/212653971-71657d64-8b46-45ca-8c05-29b2238a1958.png">
 
 
