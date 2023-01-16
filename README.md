@@ -141,4 +141,32 @@ Output:
 
 <img width="114" alt="image" src="https://user-images.githubusercontent.com/110078907/212653971-71657d64-8b46-45ca-8c05-29b2238a1958.png">
 
+## Fungsi Text - LENGTH()
+Syntax:
 
+        SELECT LENGTH(ColumnName)
+        FROM TableName; 
+        
+        select StudentID, FirstName, length(firstname) as Total_Char
+        from students;
+        
+Output:
+
+<img width="189" alt="image" src="https://user-images.githubusercontent.com/110078907/212655303-268a02ab-0761-411a-9c25-c97e0ccc9061.png">
+
+## Fungsi Text - REPLACE( )
+Syntax:
+
+        SELECT REPLACE(ColumnName, Character/String to be change, New String/Character)
+        FROM TableName; 
+        
+        select StudentID, Email, REPLACE(email,'yahoo','gmail') as New_Email
+        from students;
+        
+Output:
+
+<img width="317" alt="image" src="https://user-images.githubusercontent.com/110078907/212655605-1f503fe1-82f4-4038-839e-f08e4957531c.png">
+
+## Fungsi UPPER()
+        
+        
