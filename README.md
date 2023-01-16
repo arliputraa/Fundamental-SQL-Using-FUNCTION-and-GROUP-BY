@@ -154,7 +154,7 @@ Output:
 
 <img width="189" alt="image" src="https://user-images.githubusercontent.com/110078907/212655303-268a02ab-0761-411a-9c25-c97e0ccc9061.png">
 
-## Fungsi Text - REPLACE( )
+## Fungsi Text - REPLACE()
 Syntax:
 
         SELECT REPLACE(ColumnName, Character/String to be change, New String/Character)
@@ -167,6 +167,111 @@ Output:
 
 <img width="317" alt="image" src="https://user-images.githubusercontent.com/110078907/212655605-1f503fe1-82f4-4038-839e-f08e4957531c.png">
 
-## Fungsi UPPER()
-        
-        
+## Fungsi UPPER() & LOWER()
+UPPER() untuk mengubah kolom FirstName menjadi seluruhnya kapital dan LOWER() untuk mengubah kolom LastName menjadi seluruhnya non-kapital.
+
+Syntax:
+
+        select StudentID, upper(firstname) as FirstName , lower(lastname) as LastName 
+        from students;
+
+Output:
+
+<img width="176" alt="image" src="https://user-images.githubusercontent.com/110078907/212723751-5f70413e-4ac6-4b05-9280-ddb8562ddd6e.png">
+
+## Fungsi Aggregate
+Fungsi aggregate digunakan untuk melakukan perhitungan pada sekelompok nilai. penggunaan fungsi aggregate di SQL yang umum digunakan
+
+<img width="433" alt="image" src="https://user-images.githubusercontent.com/110078907/212724276-c32c477b-805b-4fa9-ad94-04c83bb57949.png">
+
+## Fungsi Aggregate - SUM()
+Syntax:
+
+    SELECT SUM(ColumnName)  
+    FROM TableName;
+    
+    select sum(semester1) as Total_1, sum(semester2) as Total_2
+    from students;
+    
+Output: 
+
+<img width="105" alt="image" src="https://user-images.githubusercontent.com/110078907/212724661-70680563-9f34-4318-8ee3-42f45c82b722.png">
+
+## Fungsi Aggregate - COUNT()
+Syntax:
+
+    SELECT COUNT(ColumnName)  
+    FROM TableName;
+    
+    select count(firstname) as Total_Student
+    from students;
+    
+Output:
+
+<img width="73" alt="image" src="https://user-images.githubusercontent.com/110078907/212725153-87f5e11b-0716-4cd6-b448-d6056660297e.png">
+
+## Fungsi Aggregate - AVG()
+Syntax: 
+
+    SELECT AVG(ColumnName)  
+    FROM TableName;
+    
+    select avg(semester1) as AVG_1, avg(semester2) as AVG_2
+    from students;
+    
+Output:
+
+<img width="122" alt="image" src="https://user-images.githubusercontent.com/110078907/212725467-42bc28a2-c099-43c5-a2da-5182959c1ec6.png">
+
+## Fungsi MIN() & MAX()
+contoh menggunakan fungsi MIN() dan MAX() untuk menghitung nilai dari kolom Semester1 dan Semester2.
+
+Syntax:
+
+    select min(semester1) as Min1, max(semester1) as Max1, min(semester2) as Min2, max(semester2) as Max2
+    from students;
+    
+Output:     
+
+<img width="137" alt="image" src="https://user-images.githubusercontent.com/110078907/212725963-ef908448-180e-4b3f-9b59-9f557c1f5670.png">
+
+## Pengenalan GROUP BY
+Untuk mengelompokkan data di SQL kita menggunakan GROUP BY Statement. GROUP BY statement akan mengelompokkan data yang bernilai sama ke dalam satu group, dan dengan menggunakan fungsi aggregate seperti (COUNT, MAX, MIN, SUM, AVG) kita bisa melakukan agregasi untuk untuk setiap group atau kelompok yang terbentuk.
+
+Syntax:
+
+    SELECT column_name(s)
+    FROM table_name
+    WHERE condition
+    GROUP BY column_name(s)
+    ORDER BY column_name(s)
+    
+Hal penting yang perlu diperhatikan adalah: 
+
+1. GROUP BY digunakan dengan SELECT, artinya kolom yang digunakan di GROUP BY statement, juga perlu ditempatkan di SELECT.
+
+2. GROUP BY ditempatkan setelah WHERE, tetapi jika tidak menggunakan WHERE maka langsung ditempatkan setelah FROM. 
+
+3. Jika menggunakan ORDER BY, maka GROUP BY ditempatkan sebelum ORDER BY. 
+
+Group by bisa dilakukan dengan single column ataupun multiple column. Seperti ini contohnya:
+
+* Group by Single Column, data dikelompokkan menggunakan kriteria dari satu kolom saja, misalnya mengelompokkan data berdasarkan provinsi saja. 
+
+* Group by Multiple Column, data dikelompokkan menggunakan kriteria dari dua kolom atau lebih, misalnya mengelompokkan data berdasarkan province dan brand.
+
+## Group by Single Column
+Fungsi Group by Single Column memastikan data dapat dikelompokkan menggunakan kriteria dari satu kolom saja, misalnya mengelompokkan data berdasarkan provinsi saja.
+
+Syntax: 
+
+    select province,
+    count(distinct order_id) as total_order,
+    sum(item_price) as total_price
+    from sales_retail_2019
+    group by province;
+    
+Output:
+
+<img width="209" alt="image" src="https://user-images.githubusercontent.com/110078907/212727870-66a92412-aeaa-4766-91a9-359177b59169.png">
+
