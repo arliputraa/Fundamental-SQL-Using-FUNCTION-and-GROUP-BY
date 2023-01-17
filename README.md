@@ -275,3 +275,105 @@ Output:
 
 <img width="209" alt="image" src="https://user-images.githubusercontent.com/110078907/212727870-66a92412-aeaa-4766-91a9-359177b59169.png">
 
+## Group by Multiple Column
+Fungsi Group by Multiple Column, data dapat dikelompokkan menggunakan kriteria dari dua kolom atau lebih, misalnya mengelompokkan data berdasarkan province dan brand.
+
+Syntax:
+
+    select province, brand,
+    count(distinct order_id) as total_order,
+    sum(item_price) as total_price from sales_retail_2019
+    group by province, brand;
+    
+Output:
+
+<img width="245" alt="image" src="https://user-images.githubusercontent.com/110078907/212810417-e1cc9bc4-5f3e-482f-ad8f-31b24d2fed0a.png">
+
+## Fungsi Aggregate with Grouping
+Syntax: 
+
+    select province, count(distinct order_id) as total_unique_order,
+    sum(item_price) as revenue from sales_retail_2019
+    group by province;
+
+Output:
+
+<img width="235" alt="image" src="https://user-images.githubusercontent.com/110078907/212810985-a34a7718-cf64-42fe-8c52-887f44876712.png">
+
+## CASE ...  WHEN ...
+Syntax dari CASE - statement:
+
+    CASE
+        WHEN condition1 THEN result1
+        WHEN condition2 THEN result2
+        WHEN conditionN THEN resultN
+        ELSE result
+    END;
+    
+CASE - statement ditempatkan sesudah SELECT, Berikut syntax-nya secara lengkap:
+
+    SELECT ColumnName1, ColumnName2,
+    CASE 
+        WHEN condition1 THEN result1
+        WHEN condition2 THEN result2
+        WHEN conditionN THEN resultN
+        ELSE result
+    END as alias
+    FROM TableName;
+    
+CASE-statement akan mengevaluasi kondisi yang sudah ditentukan, dimulai dari condition1, dan akan mengembalikan hasil (result1), jika condition1 terpenuhi (TRUE). Jika tidak, maka condition2 akan dievaluasi, dan akan mengembalikan result2 jika condition2 terpenuhi, dst. Apabila tidak ada kondisi yang terpenuhi, maka result pada bagian ELSE yang akan dikembalikan. 
+
+## CASE WHEN EXAMPLE
+Syntax:
+
+    SELECT month(order_date) AS order_month, sum(item_price) AS total_price, 
+    CASE  
+        WHEN sum(item_price) >= 30000000000 THEN 'Target Achieved'
+        WHEN sum(item_price) <= 25000000000 THEN 'Less Performed'
+        ELSE 'Follow Up'
+    END as remark
+    FROM sales_retail_2019
+    GROUP BY month(order_date);
+
+Output:
+
+<img width="193" alt="image" src="https://user-images.githubusercontent.com/110078907/212813003-71303e29-3c52-4742-962c-5e1c4261b0c5.png">
+
+## PRACTICE
+Syntax: 
+
+    ## 1. Total jumlah seluruh penjualan (total/revenue).
+    SELECT sum(total) as total 
+    FROM tr_penjualan;
+    ## 2. Total quantity seluruh produk yang terjual.
+    SELECT sum(qty) as qty 
+    FROM tr_penjualan;
+    ## 3. Total quantity dan total revenue untuk setiap kode produk.
+    SELECT kode_produk, sum(qty) as qty, sum(total) as total 
+    FROM tr_penjualan
+    GROUP BY kode_produk;
+
+Output:
+
+<img width="119" alt="image" src="https://user-images.githubusercontent.com/110078907/212814294-ed862140-c5bb-4f9d-9315-d32402e0166f.png">
+
+Syntax: 
+
+    ## 4. Rata - Rata total belanja per kode pelanggan.
+    SELECT kode_pelanggan, avg(total) as avg_total 
+    FROM tr_penjualan
+    GROUP BY kode_pelanggan;
+    ## 5. Selain itu,  jangan lupa untuk menambahkan kolom baru dengan nama ‘kategori’ yang mengkategorikan total/revenue ke dalam 3 kategori: High: > 300K; Medium: 100K - 300K; Low: <100K.
+    SELECT kode_transaksi,kode_pelanggan,no_urut,kode_produk, nama_produk, qty, total,
+    CASE  
+        WHEN total > 300000 THEN 'High'
+        WHEN total < 100000 THEN 'Low'   
+        ELSE 'Medium'  
+    END as kategori
+    FROM tr_penjualan;
+    
+Output:
+
+<img width="428" alt="image" src="https://user-images.githubusercontent.com/110078907/212814576-a686434a-fc23-4f6b-8254-3f5041dbf27c.png">
+
+
